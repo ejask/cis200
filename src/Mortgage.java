@@ -1,48 +1,111 @@
+import java.io.IOException;
+
+/**
+ * Mortgage.java
+ * Emma Jaskowiec / Thurs 4:30 (Lab 02B)
+ *
+ * Represents a loan mortgage (i.e. a house loan). TODO: finish description
+ */
 public class Mortgage {
-  /**
-   * Read in from user, validate, and store the amount of the loan
-   */
-  public void storeLoanAmount() {}
+  /** The minimum total loan amount (inclusive). */
+  private static final double LOAN_MIN = 100000.0;
+  /** The maximum total loan amount (exclusive). */
+  private static final double LOAN_MAX = 1000000.0;
+  /** The minimum interest rate (inclusive). */
+  private static final double INTEREST_MIN = 3.5;
+  /** The maximum interest rate (inclusive). */
+  private static final double INTEREST_MAX = 9.0;
+  /** The minimum mortage term (inclusive). */
+  private static final double TERM_MIN = 15.0;
+  /** The maximum mortgage term (inclusive). */
+  private static final double TERM_MAX = 50.0;
+
+  /** The yearly interest rate as a percentage. */
+  private double interestRate;
+  /** The term of the Mortgage in years. */
+  private double term;
+  /** The total loan amount in dollars. */
+  private double loanAmount;
+  /** The customer's account number. */
+  private int accountNum;
+  /** The customer's last name. */
+  private String lastName;
 
   /**
-   * Read in from user, validate, and store the term of the loan
+   * Default constructor
    */
-  public void storeTerm() {}
+  public Mortgage() {
+  }
 
   /**
-   * Read in from user, validate, and store the yearly interest rate of the loan
+   * Constructor with customer last name
    */
-  public void storeInterestRate() {}
+  public Mortgage(double interestRate, double term, double loanAmount,
+      String lastName) {
+  }
 
   /**
-   * Read in from user and store the last name of the customer
-   */
-  public void storeLastName() {}
-  
-  /**
-   * Generate random number, create account number, and store the account number of the customer
-   */
-  public void storeAcctNum() {}
-
-  /**
-   * Calculate and return the monthly payment for the loan
+   * Reads in from user, validates, and stores the amount of the loan.
    *
-   * @return
+   * @throws IOException
    */
-  private double calcMonthlyPayment() {}
+  public void storeLoanAmount() throws IOException {
+  }
 
   /**
-   * Calculate and return the total payment for the loan
+   * Reads in from user, validates, and stores the term of the loan.
    *
-   * @return
+   * @throws IOException
    */
-  private double calcTotalPayment() {}
+  public void storeTerm() throws IOException {
+  }
 
   /**
-   * Display formatted output
+   * Reads in from user, validates, and stores the yearly interest rate of the
+   * loan.
    *
-   * @return
+   * @throws IOException
+   */
+  public void storeInterestRate() throws IOException {
+  }
+
+  /**
+   * Reads in from user and stores the last name of the customer.
+   *
+   * @throws IOException
+   */
+  public void storeLastName() throws IOException {
+  }
+
+  /**
+   * Generates a random number, creates an account number, and stores the account
+   * number of the customer.
+   */
+  public void storeAcctNum() {
+  }
+
+  /**
+   * Displays formatted output.
+   *
+   * @return A String representing the Mortgage.
    */
   @Override
-  public String toString() {}
+  public String toString() {
+  }
+
+  /**
+   * Calculates the monthly loan payment.
+   *
+   * @return The monthly loan payment.
+   */
+  private double calcMonthlyPayment() {
+  }
+
+  /**
+   * Calculates the total payment for the loan.
+   *
+   * @return The total loan payment.
+   */
+  private double calcTotalPayment() {
+  }
 }
