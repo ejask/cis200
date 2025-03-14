@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Mortgage.java
@@ -61,42 +62,70 @@ public class Mortgage {
 
   /**
    * Reads in from user, validates, and stores the amount of the loan.
-   *
-   * @throws IOException
    */
-  public void storeLoanAmount() throws IOException {
-  }
+  public void storeLoanAmount() {
+    Scanner s = new Scanner(System.in);
+    boolean reEnter = false;
 
-  /**
-   * Reads in from user, validates, and stores the term of the loan.
-   *
-   * @throws IOException
-   */
-  public void storeTerm() throws IOException {
+    while (true) {
+      String input;
+      double amount;
+
+      // get input
+      if (reEnter) {
+        System.out.print("Please re-enter loan amount without $ or commas (Ex:120000): ");
+      } else {
+        System.out.print("Enter the amount of the loan (Ex:120000): ");
+      }
+      // remove characters that aren't digits or a decimal points
+      input = s.nextLine().trim().replaceAll("[^0-9.]", " ");
+      // TODO: remove extra decimal points
+
+      // parse number
+      try {
+        amount = Double.parseDouble(input);
+      } catch (NumberFormatException e) {
+        System.out.printf("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX);
+        reEnter = true;
+        continue; // retry input
+      }
+
+      // range checking
+      if (amount < LOAN_MIN || amount >= LOAN_MAX) {
+        System.out.printf("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX);
+        reEnter = true;
+        continue; // retry input
+      }
+
+      this.loanAmount = amount; // accept input
+      s.close();
+    }
   }
 
   /**
    * Reads in from user, validates, and stores the yearly interest rate of the
    * loan.
-   *
-   * @throws IOException
    */
-  public void storeInterestRate() throws IOException {
+  public void storeInterestRate() {
+  }
+
+  /**
+   * Reads in from user, validates, and stores the term of the loan.
+   */
+  public void storeTerm() {
+  }
+
+  /**
+   * Generates a random number, creates an account number, and stores the
+   * account number of the customer.
+   */
+  public void storeAcctNum() {
   }
 
   /**
    * Reads in from user and stores the last name of the customer.
-   *
-   * @throws IOException
    */
-  public void storeLastName() throws IOException {
-  }
-
-  /**
-   * Generates a random number, creates an account number, and stores the account
-   * number of the customer.
-   */
-  public void storeAcctNum() {
+  public void storeLastName() {
   }
 
   /**
