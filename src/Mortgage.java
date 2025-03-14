@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -57,10 +58,10 @@ public class Mortgage {
    */
   public Mortgage(double loanAmount, double interestRate, int term,
       String lastName) {
-    setLoanAmount(loanAmount);
-    setInterestRate(interestRate);
-    setTerm(term);
-    this.lastName = formatLastName(lastName);
+    this.setLoanAmount(loanAmount);
+    this.setInterestRate(interestRate);
+    this.setTerm(term);
+    this.setLastName(lastName); // also generates account number
   }
 
   /**
@@ -94,7 +95,7 @@ public class Mortgage {
       }
 
       try {
-        setLoanAmount(amount);
+        this.setLoanAmount(amount);
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e);
@@ -136,7 +137,7 @@ public class Mortgage {
       }
 
       try {
-        setInterestRate(interest);
+        this.setInterestRate(interest);
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e);
@@ -176,7 +177,7 @@ public class Mortgage {
       }
 
       try {
-        setTerm(term);
+        this.setTerm(term);
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e);
@@ -191,17 +192,31 @@ public class Mortgage {
    * account number of the customer.
    */
   public void storeAcctNum() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(this.lastName.substring(0, 4));
+    Random rand = new Random();
+    // generate individual digits to allow for leading zeros
+    for (int i = 0; i <= 4; i++) {
+      sb.append(rand.nextInt(10));
+    }
+    this.accountNum = sb.toString();
   }
 
   /**
    * Reads in from user and stores the last name of the customer.
    */
   public void storeLastName() {
-  }
-
-  public String formatLastName(String name) {
-    name = name.trim();
-    return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+    Scanner scan = new Scanner(System.in);
+    while (true) {
+      System.out.print("Enter customer's Last Name Only: ");
+      try {
+        this.setLastName(scan.nextLine());
+        break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e);
+      }
+    }
+    scan.close();
   }
 
   /**
@@ -248,6 +263,17 @@ public class Mortgage {
     this.term = term;
   }
 
+  public void setLastName(String name) {
+    if (name == "") {
+      throw new IllegalArgumentException(
+          "Customer last name must be at least one character.");
+    }
+    name = name.trim();
+    name = Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+    this.lastName = name;
+    this.storeAcctNum(); // regenerate account number when last name changes
+  }
+
   public double getLoanAmount() {
     return this.loanAmount;
   }
@@ -258,6 +284,14 @@ public class Mortgage {
 
   public int getTerm() {
     return this.term;
+  }
+
+  public String getAccountNum() {
+    return this.accountNum;
+  }
+
+  public String getLastName() {
+    return this.lastName;
   }
 
   /**
