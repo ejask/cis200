@@ -8,35 +8,21 @@ import java.util.Scanner;
  * Represents a loan mortgage (i.e. a house loan). TODO: finish description
  */
 public class Mortgage {
-  /** The minimum total principal (inclusive). */
   private static final double LOAN_MIN = 100000.0;
-  /** The maximum total principal (exclusive). */
   private static final double LOAN_MAX = 1000000.0;
-  /** The minimum interest rate (inclusive). */
   private static final double INTEREST_MIN = 3.5;
-  /** The maximum interest rate (inclusive). */
   private static final double INTEREST_MAX = 9.0;
-  /** The minimum mortage term (inclusive). */
   private static final int TERM_MIN = 15;
-  /** The maximum mortgage term (inclusive). */
   private static final int TERM_MAX = 50;
 
-  /** The promotional pricipal amount. */
   private static final double PROMO_LOAN_AMOUNT = 300000;
-  /** The promotional interest rate. */
   private static final double PROMO_INTEREST = 5.25;
-  /** The promotional mortgage term. */
   private static final int PROMO_TERM = 30;
 
-  /** The loan amount (principal) in dollars. */
   private double loanAmount;
-  /** The yearly interest rate as a percentage. */
   private double interestRate;
-  /** The term of the Mortgage in years. */
   private int term;
-  /** The customer's account number. */
   private String accountNum;
-  /** The customer's last name. */
   private String lastName;
 
   /**
@@ -54,7 +40,7 @@ public class Mortgage {
   }
 
   /**
-   * Creates a Mortgage with the given fields.
+   * Creates a Mortgage with the given field values.
    */
   public Mortgage(double loanAmount, double interestRate, int term,
       String lastName) {
@@ -203,7 +189,7 @@ public class Mortgage {
   }
 
   /**
-   * Reads in from user and stores the last name of the customer.
+   * Reads in from the user and stores the last name of the customer.
    */
   public void storeLastName() {
     Scanner scan = new Scanner(System.in);
@@ -220,9 +206,9 @@ public class Mortgage {
   }
 
   /**
-   * Calculates the monthly loan payment.
+   * Calculates and returns the monthly loan payment.
    *
-   * @return The monthly loan payment.
+   * @return the monthly loan payment in dollars
    */
   private double calcMonthlyPayment() {
     double monthlyInterest = this.interestRate / 12.0;
@@ -231,14 +217,20 @@ public class Mortgage {
   }
 
   /**
-   * Calculates the total payment for the loan.
+   * Calculates and returns the total payment for the loan.
    *
-   * @return The total loan payment.
+   * @return the total loan payment in dollars
    */
   private double calcTotalPayment() {
     return this.calcMonthlyPayment() * this.term * 12;
   }
 
+  /**
+   * @param amount the new loan amount (i.e. principal) of this
+   *               <code>Mortgage</code> (in dollars)
+   * @throws IllegalArgumentException if the amount is not between 100,000
+   *                                  (inclusive) and 1,000,000 (exclusive)
+   */
   public void setLoanAmount(double amount) throws IllegalArgumentException {
     if (amount < LOAN_MIN || amount >= LOAN_MAX) {
       throw new IllegalArgumentException(
@@ -247,6 +239,12 @@ public class Mortgage {
     this.loanAmount = amount;
   }
 
+  /**
+   * @param term the new interest rate of this <code>Mortgage</code> (as a
+   *             percentage)
+   * @throws IllegalArgumentException if the interest rate is not between 3.5 and
+   *                                  9.0 (inclusive)
+   */
   public void setInterestRate(double interestRate) throws IllegalArgumentException {
     if (interestRate < INTEREST_MIN || interestRate > INTEREST_MAX) {
       throw new IllegalArgumentException(
@@ -255,6 +253,11 @@ public class Mortgage {
     this.interestRate = interestRate;
   }
 
+  /**
+   * @param term the new term of this <code>Mortgage</code> (in years)
+   * @throws IllegalArgumentException if the term is not between 15 and 50
+   *                                  (inclusive)
+   */
   public void setTerm(int term) throws IllegalArgumentException {
     if (term < TERM_MIN || term > TERM_MAX) {
       throw new IllegalArgumentException(
@@ -263,10 +266,14 @@ public class Mortgage {
     this.term = term;
   }
 
+  /**
+   * @param name the new last name to associate with the <code>Mortgage</code>
+   * @throws IllegalArgumentException if the name is not at least one character
+   *                                  long
+   */
   public void setLastName(String name) {
     if (name == "") {
-      throw new IllegalArgumentException(
-          "Customer last name must be at least one character.");
+      throw new IllegalArgumentException("Customer last name must be at least one character.");
     }
     name = name.trim();
     name = Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
@@ -274,36 +281,49 @@ public class Mortgage {
     this.storeAcctNum(); // regenerate account number when last name changes
   }
 
+  /**
+   * @return the principal (in dollars) of this <code>Mortgage</code>
+   */
   public double getLoanAmount() {
     return this.loanAmount;
   }
 
+  /**
+   * @return the interest rate (as a percentage) of this <code>Mortgage</code>
+   */
   public double getInterestRate() {
     return this.interestRate;
   }
 
+  /**
+   * @return the term (in years) of this <code>Mortgage</code>
+   */
   public int getTerm() {
     return this.term;
   }
 
+  /**
+   * @return the account number associated with this <code>Mortgage</code>
+   */
   public String getAccountNum() {
     return this.accountNum;
   }
 
+  /**
+   * @return the last name associated with this <code>Mortgage</code>
+   */
   public String getLastName() {
     return this.lastName;
   }
 
   /**
-   * Displays formatted output.
-   *
-   * @return A String representing the Mortgage.
+   * @return a <code>String</code> representation of this <code>Mortgage</code>
    */
   @Override
   public String toString() {
     return String.format(
         "Account Number: %s\nThe monthly payment is $%,.2f\nThe total payment is $%,.2f\n",
-        this.accountNum,
+        this.getAccountNum(),
         this.calcMonthlyPayment(),
         this.calcTotalPayment());
   }
