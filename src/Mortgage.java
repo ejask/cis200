@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -56,8 +55,12 @@ public class Mortgage {
   /**
    * Creates a Mortgage with the given fields.
    */
-  public Mortgage(double loanAmount, double interestRate, double term,
+  public Mortgage(double loanAmount, double interestRate, int term,
       String lastName) {
+    setLoanAmount(loanAmount);
+    setInterestRate(interestRate);
+    setTerm(term);
+    this.lastName = formatLastName(lastName);
   }
 
   /**
@@ -90,16 +93,15 @@ public class Mortgage {
         continue; // retry input
       }
 
-      // range checking
-      if (amount < LOAN_MIN || amount >= LOAN_MAX) {
-        System.out.printf("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX);
-        reEnter = true;
-        continue; // retry input
+      try {
+        setLoanAmount(amount);
+        break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e);
       }
-
-      this.loanAmount = amount; // accept input
-      s.close();
     }
+
+    s.close();
   }
 
   /**
@@ -128,6 +130,11 @@ public class Mortgage {
   public void storeLastName() {
   }
 
+  public String formatLastName(String name) {
+    name = name.trim();
+    return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
+  }
+
   /**
    * Calculates the monthly loan payment.
    *
@@ -146,6 +153,42 @@ public class Mortgage {
    */
   private double calcTotalPayment() {
     return this.calcMonthlyPayment() * this.term * 12;
+  }
+
+  public void setLoanAmount(double amount) throws IllegalArgumentException {
+    if (amount < LOAN_MIN || amount >= LOAN_MAX) {
+      throw new IllegalArgumentException(
+          String.format("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX));
+    }
+    this.loanAmount = amount;
+  }
+
+  public void setInterestRate(double interestRate) throws IllegalArgumentException {
+    if (interestRate < INTEREST_MIN || interestRate > INTEREST_MAX) {
+      throw new IllegalArgumentException(
+          String.format("\tValid Interest Rates are %.1f%% - %.1f%%\n", INTEREST_MIN, INTEREST_MAX));
+    }
+    this.interestRate = interestRate;
+  }
+
+  public void setTerm(int term) throws IllegalArgumentException {
+    if (term < TERM_MIN || term > TERM_MAX) {
+      throw new IllegalArgumentException(
+          String.format("\tValid Loan Terms are %d-%d\n", TERM_MIN, TERM_MAX));
+    }
+    this.term = term;
+  }
+
+  public double getLoanAmount() {
+    return this.loanAmount;
+  }
+
+  public double getInterestRate() {
+    return this.interestRate;
+  }
+
+  public int getTerm() {
+    return this.term;
   }
 
   /**
