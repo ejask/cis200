@@ -75,10 +75,10 @@ public class Mortgage {
       double amount;
 
       // get input
-      if (reEnter) {
-        System.out.print("Please re-enter loan amount without $ or commas (Ex:120000): ");
-      } else {
+      if (!reEnter) {
         System.out.print("Enter the amount of the loan (Ex:120000): ");
+      } else {
+        System.out.print("Please re-enter loan amount without $ or commas (Ex:120000): ");
       }
       // remove characters that aren't digits or a decimal points
       input = s.nextLine().trim().replaceAll("[^0-9.]", " ");
@@ -109,12 +109,81 @@ public class Mortgage {
    * loan.
    */
   public void storeInterestRate() {
+    Scanner s = new Scanner(System.in);
+    boolean reEnter = false;
+
+    while (true) {
+      String input;
+      double interest;
+
+      // get input
+      if (!reEnter) {
+        System.out.print("Enter yearly interest rate (Ex: 8.25): ");
+      } else {
+        System.out.print("Please re-enter valid yearly interest rate (Ex: 8.25): ");
+      }
+      // remove characters that aren't digits or a decimal points
+      input = s.nextLine().trim().replaceAll("[^0-9.]", " ");
+      // TODO: remove extra decimal points
+
+      // parse number
+      try {
+        interest = Double.parseDouble(input);
+      } catch (NumberFormatException e) {
+        System.out.printf("\tValid Interest Rates are %.1f%% - %.1f%%\n", INTEREST_MIN, INTEREST_MAX);
+        reEnter = true;
+        continue; // retry input
+      }
+
+      try {
+        setInterestRate(interest);
+        break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e);
+      }
+    }
+
+    s.close();
   }
 
   /**
    * Reads in from user, validates, and stores the term of the loan.
    */
   public void storeTerm() {
+    Scanner s = new Scanner(System.in);
+    boolean reEnter = false;
+
+    while (true) {
+      String input;
+      int term;
+
+      // get input
+      if (!reEnter) {
+        System.out.print("Enter number of years for the loan: ");
+      } else {
+        System.out.print("Please re-enter valid number of years: ");
+      }
+      // remove characters that aren't digits
+      input = s.nextLine().trim().replaceAll("[^0-9]", " ");
+
+      // parse number
+      try {
+        term = Integer.parseInt(input);
+      } catch (NumberFormatException e) {
+        System.out.printf("\tValid Loan Terms are %d-%d\n", TERM_MIN, TERM_MAX);
+        reEnter = true;
+        continue; // retry input
+      }
+
+      try {
+        setTerm(term);
+        break;
+      } catch (IllegalArgumentException e) {
+        System.out.println(e);
+      }
+    }
+
+    s.close();
   }
 
   /**
