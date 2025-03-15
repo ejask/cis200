@@ -26,7 +26,7 @@ public class Mortgage {
   /** the term (in years) */
   private int term;
   /** the customer's account number */
-  private String accountNum;
+  private String acctNum;
   /** the customer's last name */
   private String lastName;
 
@@ -41,8 +41,7 @@ public class Mortgage {
   }
 
   /** Creates a Mortgage with the given field values. */
-  public Mortgage(double loanAmount, double interestRate, int term,
-      String lastName) {
+  public Mortgage(double loanAmount, double interestRate, int term, String lastName) {
     this.setLoanAmount(loanAmount);
     this.setInterestRate(interestRate);
     this.setTerm(term);
@@ -66,7 +65,6 @@ public class Mortgage {
       }
       // remove characters that aren't digits or a decimal points
       input = s.nextLine().trim().replaceAll("[^0-9.]", " ");
-      // TODO: remove extra decimal points
 
       // parse number
       try {
@@ -105,7 +103,6 @@ public class Mortgage {
       }
       // remove characters that aren't digits or a decimal points
       input = s.nextLine().trim().replaceAll("[^0-9.]", " ");
-      // TODO: remove extra decimal points
 
       // parse number
       try {
@@ -165,16 +162,9 @@ public class Mortgage {
     s.close();
   }
 
-  /** Creates and stores an account number using the first four letters of the customer's last name and four random digits. */
+  /** Creates and stores an account number using the first four letters of the customer's last name and a random {@code int} between 100 (inclusive) to 10000 (exclusive). */
   public void storeAcctNum() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(this.lastName.substring(0, 4));
-    Random rand = new Random();
-    // generate individual digits to allow for leading zeros
-    for (int i = 0; i <= 4; i++) {
-      sb.append(rand.nextInt(10));
-    }
-    this.accountNum = sb.toString();
+    this.acctNum = this.lastName.substring(0, 4) + new Random().nextInt(100, 10000);
   }
 
   /** Reads in from the user and stores the last name of the customer. */
@@ -217,7 +207,8 @@ public class Mortgage {
   public void setLoanAmount(double amount) throws IllegalArgumentException {
     if (amount < LOAN_MIN || amount >= LOAN_MAX) {
       throw new IllegalArgumentException(
-          String.format("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX));
+          String.format("\tValid Loan Amounts are $%.0f - $%.0f (non-inclusive)\n", LOAN_MIN, LOAN_MAX)
+      );
     }
     this.loanAmount = amount;
   }
@@ -229,7 +220,8 @@ public class Mortgage {
   public void setInterestRate(double interestRate) throws IllegalArgumentException {
     if (interestRate < INTEREST_MIN || interestRate > INTEREST_MAX) {
       throw new IllegalArgumentException(
-          String.format("\tValid Interest Rates are %.1f%% - %.1f%%\n", INTEREST_MIN, INTEREST_MAX));
+          String.format("\tValid Interest Rates are %.1f%% - %.1f%%\n", INTEREST_MIN, INTEREST_MAX)
+      );
     }
     this.interestRate = interestRate;
   }
@@ -241,7 +233,8 @@ public class Mortgage {
   public void setTerm(int term) throws IllegalArgumentException {
     if (term < TERM_MIN || term > TERM_MAX) {
       throw new IllegalArgumentException(
-          String.format("\tValid Loan Terms are %d-%d\n", TERM_MIN, TERM_MAX));
+          String.format("\tValid Loan Terms are %d-%d\n", TERM_MIN, TERM_MAX)
+      );
     }
     this.term = term;
   }
@@ -276,8 +269,8 @@ public class Mortgage {
   }
 
   /** @return the account number associated with this {@code Mortgage} */
-  public String getAccountNum() {
-    return this.accountNum;
+  public String getAcctNum() {
+    return this.acctNum;
   }
 
   /** @return the last name associated with this {@code Mortgage} */
@@ -290,8 +283,9 @@ public class Mortgage {
   public String toString() {
     return String.format(
         "Account Number: %s\nThe monthly payment is $%,.2f\nThe total payment is $%,.2f\n",
-        this.getAccountNum(),
+        this.getAcctNum(),
         this.calcMonthlyPayment(),
-        this.calcTotalPayment());
+        this.calcTotalPayment()
+    );
   }
 }
