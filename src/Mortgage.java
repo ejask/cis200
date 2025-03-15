@@ -19,29 +19,28 @@ public class Mortgage {
   private static final double PROMO_INTEREST = 5.25;
   private static final int PROMO_TERM = 30;
 
+  /** the principal (in dollars) */
   private double loanAmount;
+  /** the yearly interest rate (as a percentage) */
   private double interestRate;
+  /** the term (in years) */
   private int term;
+  /** the customer's account number */
   private String accountNum;
+  /** the customer's last name */
   private String lastName;
 
-  /**
-   * Creates a promotional Mortgage with no account name.
-   */
+  /** Creates a promotional Mortgage with no account name. */
   public Mortgage() {
     this(PROMO_LOAN_AMOUNT, PROMO_INTEREST, PROMO_TERM, null);
   }
 
-  /**
-   * Creates a promotional Mortgage with the given account name.
-   */
+  /** Creates a promotional Mortgage with the given account name. */
   public Mortgage(String lastName) {
     this(PROMO_LOAN_AMOUNT, PROMO_INTEREST, PROMO_TERM, lastName);
   }
 
-  /**
-   * Creates a Mortgage with the given field values.
-   */
+  /** Creates a Mortgage with the given field values. */
   public Mortgage(double loanAmount, double interestRate, int term,
       String lastName) {
     this.setLoanAmount(loanAmount);
@@ -50,9 +49,7 @@ public class Mortgage {
     this.setLastName(lastName); // also generates account number
   }
 
-  /**
-   * Reads in from user, validates, and stores the amount of the loan.
-   */
+  /** Reads in from the user, validates, and stores the amount of the loan. */
   public void storeLoanAmount() {
     Scanner s = new Scanner(System.in);
     boolean reEnter = false;
@@ -91,10 +88,7 @@ public class Mortgage {
     s.close();
   }
 
-  /**
-   * Reads in from user, validates, and stores the yearly interest rate of the
-   * loan.
-   */
+  /** Reads in from the user, validates, and stores the yearly interest rate of the loan. */
   public void storeInterestRate() {
     Scanner s = new Scanner(System.in);
     boolean reEnter = false;
@@ -133,9 +127,7 @@ public class Mortgage {
     s.close();
   }
 
-  /**
-   * Reads in from user, validates, and stores the term of the loan.
-   */
+  /** Reads in from the user, validates, and stores the term of the loan. */
   public void storeTerm() {
     Scanner s = new Scanner(System.in);
     boolean reEnter = false;
@@ -173,10 +165,7 @@ public class Mortgage {
     s.close();
   }
 
-  /**
-   * Generates a random number, creates an account number, and stores the
-   * account number of the customer.
-   */
+  /** Creates and stores an account number using the first four letters of the customer's last name and four random digits. */
   public void storeAcctNum() {
     StringBuilder sb = new StringBuilder();
     sb.append(this.lastName.substring(0, 4));
@@ -188,9 +177,7 @@ public class Mortgage {
     this.accountNum = sb.toString();
   }
 
-  /**
-   * Reads in from the user and stores the last name of the customer.
-   */
+  /** Reads in from the user and stores the last name of the customer. */
   public void storeLastName() {
     Scanner scan = new Scanner(System.in);
     while (true) {
@@ -207,7 +194,6 @@ public class Mortgage {
 
   /**
    * Calculates and returns the monthly loan payment.
-   *
    * @return the monthly loan payment in dollars
    */
   private double calcMonthlyPayment() {
@@ -218,7 +204,6 @@ public class Mortgage {
 
   /**
    * Calculates and returns the total payment for the loan.
-   *
    * @return the total loan payment in dollars
    */
   private double calcTotalPayment() {
@@ -226,10 +211,8 @@ public class Mortgage {
   }
 
   /**
-   * @param amount the new loan amount (i.e. principal) of this
-   *               <code>Mortgage</code> (in dollars)
-   * @throws IllegalArgumentException if the amount is not between 100,000
-   *                                  (inclusive) and 1,000,000 (exclusive)
+   * @param amount the new loan amount (i.e. principal) of this {@code Mortgage} (in dollars)
+   * @throws IllegalArgumentException if the amount is not between {@value #LOAN_MIN} (inclusive) and {@value #LOAN_MAX} (exclusive)
    */
   public void setLoanAmount(double amount) throws IllegalArgumentException {
     if (amount < LOAN_MIN || amount >= LOAN_MAX) {
@@ -240,10 +223,8 @@ public class Mortgage {
   }
 
   /**
-   * @param term the new interest rate of this <code>Mortgage</code> (as a
-   *             percentage)
-   * @throws IllegalArgumentException if the interest rate is not between 3.5 and
-   *                                  9.0 (inclusive)
+   * @param term the new interest rate of this {@code Mortgage} (as a percentage)
+   * @throws IllegalArgumentException if the interest rate is not between {@value #INTEREST_MIN} and {@value #INTEREST_MAX} (inclusive)
    */
   public void setInterestRate(double interestRate) throws IllegalArgumentException {
     if (interestRate < INTEREST_MIN || interestRate > INTEREST_MAX) {
@@ -254,9 +235,8 @@ public class Mortgage {
   }
 
   /**
-   * @param term the new term of this <code>Mortgage</code> (in years)
-   * @throws IllegalArgumentException if the term is not between 15 and 50
-   *                                  (inclusive)
+   * @param term the new term of this {@code Mortgage} (in years)
+   * @throws IllegalArgumentException if the term is not between {@value #TERM_MIN} and {@value #TERM_MAX} (inclusive)
    */
   public void setTerm(int term) throws IllegalArgumentException {
     if (term < TERM_MIN || term > TERM_MAX) {
@@ -267,9 +247,8 @@ public class Mortgage {
   }
 
   /**
-   * @param name the new last name to associate with the <code>Mortgage</code>
-   * @throws IllegalArgumentException if the name is not at least one character
-   *                                  long
+   * @param name the new last name to associate with the {@code Mortgage}
+   * @throws IllegalArgumentException if the name is not at least one character long
    */
   public void setLastName(String name) {
     if (name == "") {
@@ -281,44 +260,32 @@ public class Mortgage {
     this.storeAcctNum(); // regenerate account number when last name changes
   }
 
-  /**
-   * @return the principal (in dollars) of this <code>Mortgage</code>
-   */
+  /** @return the principal (in dollars) of this {@code Mortgage} */
   public double getLoanAmount() {
     return this.loanAmount;
   }
 
-  /**
-   * @return the interest rate (as a percentage) of this <code>Mortgage</code>
-   */
+  /** @return the interest rate (as a percentage) of this {@code Mortgage} */
   public double getInterestRate() {
     return this.interestRate;
   }
 
-  /**
-   * @return the term (in years) of this <code>Mortgage</code>
-   */
+  /** @return the term (in years) of this {@code Mortgage} */
   public int getTerm() {
     return this.term;
   }
 
-  /**
-   * @return the account number associated with this <code>Mortgage</code>
-   */
+  /** @return the account number associated with this {@code Mortgage} */
   public String getAccountNum() {
     return this.accountNum;
   }
 
-  /**
-   * @return the last name associated with this <code>Mortgage</code>
-   */
+  /** @return the last name associated with this {@code Mortgage} */
   public String getLastName() {
     return this.lastName;
   }
 
-  /**
-   * @return a <code>String</code> representation of this <code>Mortgage</code>
-   */
+  /** @return a {@code String} representation of this {@code Mortgage} */
   @Override
   public String toString() {
     return String.format(
