@@ -15,32 +15,41 @@ public class Mortgage {
   private static final int TERM_MIN = 15;
   private static final int TERM_MAX = 50;
 
-  private static final double PROMO_LOAN_AMOUNT = 300000;
-  private static final double PROMO_INTEREST = 5.25;
-  private static final int PROMO_TERM = 30;
+  /** The principal offered as part of the promotional loan. */
+  public static final double PROMO_LOAN_AMOUNT = 300000;
+  /** The interest rate offered as part of the promotional loan. */
+  public static final double PROMO_INTEREST = 5.25;
+  /** The term offered as part of the promotional loan. */
+  public static final int PROMO_TERM = 30;
 
-  /** the principal (in dollars) */
   private double loanAmount;
-  /** the yearly interest rate (as a percentage) */
   private double interestRate;
-  /** the term (in years) */
   private int term;
-  /** the customer's account number */
   private String acctNum;
-  /** the customer's last name */
   private String lastName;
 
   /** Creates a {@code Mortgage} with field values populated by user input. */
   public Mortgage() {
     this.storeLastName();
+    System.out.println();
     this.storeAcctNum();
+    System.out.println();
     this.storeLoanAmount();
+    System.out.println();
     this.storeInterestRate();
+    System.out.println();
     this.storeTerm();
   }
 
-  /** Creates a {@code Mortgage} with the given field values. */
+  /**
+   * Creates a {@code Mortgage} with the given field values and a last name from
+   * user input.
+   * @param loanAmount the principal (in dollars)
+   * @param interestRate the yearly interest rate (as a percentage)
+   * @param term the term (in years)
+   */
   public Mortgage(double loanAmount, double interestRate, int term) {
+    this.storeLastName();
     this.setLoanAmount(loanAmount);
     this.setInterestRate(interestRate);
     this.setTerm(term);
