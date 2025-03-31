@@ -6,6 +6,7 @@
  * Stores and calculates total scores for each category of assignment, as well
  * as the overall percentage and letter grade.
  */
+
 public class Student {
   private static final double LAB_WEIGHT = 0.15;
   private static final double PROJECT_WEIGHT = 0.15;
@@ -51,9 +52,10 @@ public class Student {
    * @param finalExamScore the {@link Student}'s final exam score
    */
   public Student(
-      String firstName, String lastName, String wid, double totalLabScore,
-      double totalProjectScore, double totalZyBookScore, double totalExamScore,
-      double finalExamScore) {
+    String firstName, String lastName, String wid, double totalLabScore,
+    double totalProjectScore, double totalZyBookScore, double totalExamScore,
+    double finalExamScore
+  ) {
     this.setFirstName(firstName);
     this.setLastName(lastName);
     this.setWid(wid);
@@ -125,12 +127,13 @@ public class Student {
   @Override
   public String toString() {
     return String.format(
-        "Student Name: %s, %s\nWID: %s\nOverall Pct: %.1f%%\nFinal Grade: %c",
-        this.getLastName(),
-        this.getFirstName(),
-        this.getWid(),
-        this.getOverAllScore(),
-        this.getLetterGrade());
+      "Student Name: %s, %s\nWID: %s\nOverall Pct: %.1f%%\nFinal Grade: %c",
+      this.getLastName(),
+      this.getFirstName(),
+      this.getWid(),
+      this.getOverAllScore(),
+      this.getLetterGrade()
+    );
   }
 
   /**
@@ -139,7 +142,7 @@ public class Student {
    *
    * @param stu the other {@link Student} to compare this {@link Student} to
    * @return {@code true} if the {@link Student}s are equal, {@code false}
-   *     otherwise
+   *   otherwise
    */
   public boolean equals(Student stu) {
     return this.getWid().equals(stu.getWid());
@@ -153,7 +156,7 @@ public class Student {
   public void setFirstName(String firstName) {
     firstName.trim();
     this.firstName = Character.toUpperCase(firstName.charAt(0))
-        + firstName.substring(1).toLowerCase();
+      + firstName.substring(1).toLowerCase();
   }
 
   /**
@@ -164,7 +167,7 @@ public class Student {
   public void setLastName(String lastName) {
     lastName.trim();
     this.lastName = Character.toUpperCase(lastName.charAt(0))
-        + lastName.substring(1).toLowerCase();
+      + lastName.substring(1).toLowerCase();
   }
 
   /**
@@ -189,7 +192,7 @@ public class Student {
    * Sets the value of this {@link Student}'s total lab score.
    * 
    * @param totalLabScore this {@link Student}'s new total lab score (as a
-   *     decimal representation of a percentage)
+   *   decimal representation of a percentage)
    */
   public void setTotalLabScore(double totalLabScore) {
     this.totalLabScore = totalLabScore;
@@ -199,7 +202,7 @@ public class Student {
    * Sets the value of this {@link Student}'s total project score.
    * 
    * @param totalProjectScore this {@link Student}'s new total project score (as
-   *     a decimal representation of a percentage)
+   *   a decimal representation of a percentage)
    */
   public void setTotalProjectScore(double totalProjectScore) {
     this.totalProjectScore = totalProjectScore;
@@ -209,7 +212,7 @@ public class Student {
    * Sets the value of this {@link Student}'s total zyBook score.
    * 
    * @param totalZyBookScore this {@link Student}'s new total zyBook score (as
-   *     a decimal representation of a percentage)
+   *   a decimal representation of a percentage)
    */
   public void setTotalZyBookScore(double totalZyBookScore) {
     this.totalZyBookScore = totalZyBookScore;
@@ -219,7 +222,7 @@ public class Student {
    * Sets the value of this {@link Student}'s total exam score.
    * 
    * @param totalExamScore this {@link Student}'s new total exam score (as a
-   *     decimal representation of a percentage)
+   *   decimal representation of a percentage)
    */
   public void setTotalExamScore(double totalExamScore) {
     this.totalExamScore = totalExamScore;
@@ -229,7 +232,7 @@ public class Student {
    * Sets the value of this {@link Student}'s final exam score.
    * 
    * @param finalExamScore this {@link Student}'s new final exam score (as a
-   *     decimal representation of a percentage)
+   *   decimal representation of a percentage)
    */
   public void setFinalExamScore(double finalExamScore) {
     this.finalExamScore = finalExamScore;
@@ -239,7 +242,7 @@ public class Student {
    * Sets the value of this {@link Student}'s final exam score.
    * 
    * @param finalExamScore this {@link Student}'s new final exam score (as a
-   *     decimal representation of a percentage)
+   *   decimal representation of a percentage)
    * @throws NumberFormatException if the input is not resolvable as a number
    */
   public void setFinalExamScore(String finalExamScore) throws NumberFormatException {
@@ -252,10 +255,10 @@ public class Student {
    */
   private void calcOverAllPercentScore() {
     this.overAllScore = this.totalLabScore * LAB_WEIGHT
-        + this.totalProjectScore * PROJECT_WEIGHT
-        + this.totalZyBookScore * ZYBOOK_WEIGHT
-        + this.totalExamScore * EXAM_WEIGHT
-        + this.finalExamScore * FINAL_EXAM_WEIGHT;
+      + this.totalProjectScore * PROJECT_WEIGHT
+      + this.totalZyBookScore * ZYBOOK_WEIGHT
+      + this.totalExamScore * EXAM_WEIGHT
+      + this.finalExamScore * FINAL_EXAM_WEIGHT;
     if (this.overAllScore >= 89.5) {
       this.letterGrade = 'A';
     } else if (this.overAllScore >= 79.5) {
