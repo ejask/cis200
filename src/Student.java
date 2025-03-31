@@ -53,7 +53,7 @@ public class Student {
   public Student(
       String firstName, String lastName, String wid, double totalLabScore,
       double totalProjectScore, double totalZyBookScore, double totalExamScore,
-      double finalExamScore) throws IllegalArgumentException {
+      double finalExamScore) {
     this.setFirstName(firstName);
     this.setLastName(lastName);
     this.setWid(wid);
@@ -171,32 +171,17 @@ public class Student {
    * Sets the value of this {@link Student}'s Wildcat ID (WID).
    * 
    * @param wid this {@link Student}'s new WID
-   * @throws IllegalArgumentException if the WID is not exactly 9 numeric
-   *     characters
    */
-  public void setWid(String wid) throws IllegalArgumentException {
-    final int WID_LENGTH = 9;
-    wid.trim();
-    if (wid.length() != WID_LENGTH) {
-      throw new IllegalArgumentException(String.format(
-          "Invalid length; WID must be exactly %d characters", WID_LENGTH));
-    }
-    for (int c = 0; c <= wid.length(); c++) {
-      if (!Character.isDigit(wid.charAt(c))) {
-        throw new IllegalArgumentException(
-            "Invalid input; WID must be entirely numeric");
-      }
-    }
-    this.wid = wid;
+  public void setWid(String wid) {
+    this.wid = wid.trim();
   }
 
   /**
    * Sets the value of this {@link Student}'s Wildcat ID (WID).
    * 
    * @param wid this {@link Student}'s new WID
-   * @throws IllegalArgumentException if the WID is not exactly 9 digits
    */
-  public void setWid(int wid) throws IllegalArgumentException {
+  public void setWid(int wid) {
     setWid(String.valueOf(wid));
   }
 
