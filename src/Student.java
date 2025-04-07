@@ -196,6 +196,7 @@ public class Student {
    */
   public void setTotalLabScore(double totalLabScore) {
     this.totalLabScore = totalLabScore;
+    calcOverAllPercentScore();
   }
 
   /**
@@ -206,6 +207,7 @@ public class Student {
    */
   public void setTotalProjectScore(double totalProjectScore) {
     this.totalProjectScore = totalProjectScore;
+    calcOverAllPercentScore();
   }
 
   /**
@@ -216,6 +218,7 @@ public class Student {
    */
   public void setTotalZyBookScore(double totalZyBookScore) {
     this.totalZyBookScore = totalZyBookScore;
+    calcOverAllPercentScore();
   }
 
   /**
@@ -226,6 +229,7 @@ public class Student {
    */
   public void setTotalExamScore(double totalExamScore) {
     this.totalExamScore = totalExamScore;
+    calcOverAllPercentScore();
   }
 
   /**
@@ -236,6 +240,7 @@ public class Student {
    */
   public void setFinalExamScore(double finalExamScore) {
     this.finalExamScore = finalExamScore;
+    calcOverAllPercentScore();
   }
 
   /**
