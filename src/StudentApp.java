@@ -31,9 +31,37 @@ public class StudentApp {
       student.setFirstName(view.prompt(String.format("%sfirst name", prefix)));
       student.setLastName(view.prompt(String.format("%slast name", prefix)));
       student.setWid(view.prompt(String.format("%sWID", prefix)));
+      view.nextSection();
 
+      // get scores
+      student.setTotalLabScore(
+        Double.parseDouble(
+          view.prompt(String.format("%sTotal Labs score", prefix))
+        ) / maxPoints[LAB]
+      );
+      student.setTotalProjectScore(
+        Double.parseDouble(
+          view.prompt(String.format("%sTotal Projects score", prefix))
+        ) / maxPoints[PROJECT]
+      );
+      student.setTotalZyBookScore(
+        Double.parseDouble(
+          view.prompt(String.format("%sTotal zyBook score", prefix))
+        ) / maxPoints[ZYBOOK]
+      );
+      student.setTotalExamScore(
+        Double.parseDouble(
+          view.prompt(String.format("%sTotal Exams score", prefix))
+        ) / maxPoints[EXAM]
+      );
+      student.setFinalExamScore(
+        Double.parseDouble(
+          view.prompt(String.format("%sFinal Exams score", prefix))
+        ) / maxPoints[FINAL_EXAM]
+      );
+      
       // check for duplicate
-      for (int i = 0; i < index - 1; i++) {
+      for (int i = 0; i < index; i++) {
         if (student.equals(students[i])) {
           isDuplicate = true;
         }
@@ -44,35 +72,6 @@ public class StudentApp {
         );
         index--;
       } else {
-        view.nextSection();
-
-        // get scores
-        student.setTotalLabScore(
-          Double.parseDouble(
-            view.prompt(String.format("%sTotal Labs score", prefix))
-          ) / maxPoints[LAB]
-        );
-        student.setTotalProjectScore(
-          Double.parseDouble(
-            view.prompt(String.format("%sTotal Projects score", prefix))
-          ) / maxPoints[PROJECT]
-        );
-        student.setTotalZyBookScore(
-          Double.parseDouble(
-            view.prompt(String.format("%sTotal zyBook score", prefix))
-          ) / maxPoints[ZYBOOK]
-        );
-        student.setTotalExamScore(
-          Double.parseDouble(
-            view.prompt(String.format("%sTotal Exams score", prefix))
-          ) / maxPoints[EXAM]
-        );
-        student.setFinalExamScore(
-          Double.parseDouble(
-            view.prompt(String.format("%sFinal Exams score", prefix))
-          ) / maxPoints[FINAL_EXAM]
-        );
-
         students[index] = student;
         view.display(String.format("%d Student(s) entered.", index + 1));
       }
