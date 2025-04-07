@@ -259,11 +259,11 @@ public class Student {
    * both a percentage and a letter grade.
    */
   private void calcOverAllPercentScore() {
-    this.overAllScore = this.totalLabScore * LAB_WEIGHT
+    this.overAllScore = (this.totalLabScore * LAB_WEIGHT
       + this.totalProjectScore * PROJECT_WEIGHT
       + this.totalZyBookScore * ZYBOOK_WEIGHT
       + this.totalExamScore * EXAM_WEIGHT
-      + this.finalExamScore * FINAL_EXAM_WEIGHT;
+      + this.finalExamScore * FINAL_EXAM_WEIGHT) * 100;
     if (this.overAllScore >= 89.5) {
       this.letterGrade = 'A';
     } else if (this.overAllScore >= 79.5) {
