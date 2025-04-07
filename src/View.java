@@ -4,7 +4,7 @@ import java.util.Scanner;
  * View.java
  * Emma Jaskowiec / Thurs 4:30 (Lab 02B)
  *
- * TODO: class description
+ * Implements a command line view API for {@link StudentApp}.
  */
 
 public class View {
@@ -16,8 +16,10 @@ public class View {
   }
 
   /**
-   * @param message
-   * @return
+   * Prints a prompt message to output and returns the following user input.
+   * 
+   * @param message the prompt message
+   * @return the next line of user input
    */
   public String prompt(String message) {
     System.out.printf("%s: ", message);
@@ -25,8 +27,11 @@ public class View {
   }
 
   /**
-   * @param message
-   * @return
+   * Prints a "yes or no" prompt message to output and returns the following
+   * user input.
+   *
+   * @param message the prompt message
+   * @return the next line of user input
    */
   public String promptYN(String message) {
     System.out.printf("%s (Y/N): ", message);
@@ -34,7 +39,10 @@ public class View {
   }
 
   /**
-   * @param message
+   * Prints a prompt message to output and continues when the user inputs a
+   * newline.
+   *
+   * @param message the prompt message
    */
   public void promptContinue(String message) {
     System.out.printf("%s ... ", message);
@@ -42,15 +50,15 @@ public class View {
   }
 
   /**
-   * @param message
+   * Prints a {@link String} to stdout.
+   *
+   * @param message the {@link String} to display
    */
   public void display(String message) {
     System.out.println(message);
   }
 
-  /**
-   *
-   */
+  /** Prints a newline to stdout. */
   public void nextSection() {
     System.out.println();
   }
