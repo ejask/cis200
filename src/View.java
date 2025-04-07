@@ -45,7 +45,7 @@ public class View {
    * @param message the prompt message
    */
   public void promptContinue(String message) {
-    System.out.printf("%s ... ", message);
+    System.out.printf("%s... ", message);
     scan.nextLine();
   }
 
