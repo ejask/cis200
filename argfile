@@ -1,1 +1,1 @@
--d out/ src/Student.java
+-d out/ src/Student.java src/View.java
