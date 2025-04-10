@@ -16,7 +16,7 @@ public class View {
   }
 
   /**
-   * Prints a prompt message to output and returns the following user input.
+   * Prints a message to output and returns the following input.
    * 
    * @param message the prompt message
    * @return the input line
