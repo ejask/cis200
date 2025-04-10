@@ -2,6 +2,8 @@
  * StudentApp.java
  * Emma Jaskowiec / Thurs 4:30 (Lab 02B)
  *
+ * EXTRA CREDIT INCLUDED
+ *
  * TODO: class description
  */
 
@@ -11,56 +13,46 @@ public class StudentApp {
     Student[] students = new Student[20];
     View view = new View();
     String prefix = "Please enter the total number of points possible for ";
+    int index;
 
     double[] maxPoints = new double[] {
-      Double.parseDouble(view.prompt(String.format("%sLabs", prefix))),
-      Double.parseDouble(view.prompt(String.format("%sProjects", prefix))),
-      Double.parseDouble(view.prompt(String.format("%szyBook", prefix))),
-      Double.parseDouble(view.prompt(String.format("%sExams", prefix))),
-      Double.parseDouble(view.prompt(String.format("%sFinal Exam", prefix))),
+      view.promptNum(String.format("%sLabs", prefix)),
+      view.promptNum(String.format("%sProjects", prefix)),
+      view.promptNum(String.format("%szyBook", prefix)),
+      view.promptNum(String.format("%sExams", prefix)),
+      view.promptNum(String.format("%sFinal Exam", prefix)),
     };
     prefix = "Enter the student's ";
-    int index;
-    view.nextSection();
+    view.section();
 
     for (index = 0; index < students.length; index++) {
       Student student = new Student();
-      boolean isDuplicate = false;
 
       // get identifying info
       student.setFirstName(view.prompt(String.format("%sfirst name", prefix)));
       student.setLastName(view.prompt(String.format("%slast name", prefix)));
       student.setWid(view.prompt(String.format("%sWID", prefix)));
-      view.nextSection();
+      view.section();
 
       // get scores
-      student.setTotalLabScore(
-        Double.parseDouble(
-          view.prompt(String.format("%sTotal Labs score", prefix))
-        ) / maxPoints[LAB]
-      );
-      student.setTotalProjectScore(
-        Double.parseDouble(
-          view.prompt(String.format("%sTotal Projects score", prefix))
-        ) / maxPoints[PROJECT]
-      );
-      student.setTotalZyBookScore(
-        Double.parseDouble(
-          view.prompt(String.format("%sTotal zyBook score", prefix))
-        ) / maxPoints[ZYBOOK]
-      );
-      student.setTotalExamScore(
-        Double.parseDouble(
-          view.prompt(String.format("%sTotal Exams score", prefix))
-        ) / maxPoints[EXAM]
-      );
-      student.setFinalExamScore(
-        Double.parseDouble(
-          view.prompt(String.format("%sFinal Exams score", prefix))
-        ) / maxPoints[FINAL_EXAM]
-      );
+      student.setTotalLabScore(view.promptNum(
+        String.format("%sTotal Labs score", prefix)
+      ) / maxPoints[LAB]);
+      student.setTotalProjectScore(view.promptNum(
+        String.format("%sTotal Projects score", prefix)
+      ) / maxPoints[PROJECT]);
+      student.setTotalZyBookScore(view.promptNum(
+        String.format("%sTotal zyBook score", prefix)
+      ) / maxPoints[ZYBOOK]);
+      student.setTotalExamScore(view.promptNum(
+        String.format("%sTotal Exams score", prefix)
+      ) / maxPoints[EXAM]);
+      student.setFinalExamScore(view.promptNum(
+        String.format("%sFinal Exams score", prefix)
+      ) / maxPoints[FINAL_EXAM]);
       
       // check for duplicate
+      boolean isDuplicate = false;
       for (int i = 0; i < index; i++) {
         if (student.equals(students[i])) {
           isDuplicate = true;
@@ -77,18 +69,16 @@ public class StudentApp {
       }
 
       // prompt to continue
-      view.nextSection();
-      if (!view.promptYN("Enter another student?").equalsIgnoreCase("y")) {
-        view.nextSection();
+      view.section();
+      if (!view.promptYN("Enter another student?")) {
+        view.section();
         break;
       }
     }
 
     // display results
     for (int i = 0; i <= index; i++) {
-      view.display(String.format("%s", students[i]));
-      view.promptContinue("\tPress enter to display next student");
-      view.nextSection();
+      view.promptNext(students[i].toString());
     }
     view.display("All students displayed.");
   }
