@@ -4,7 +4,10 @@
  *
  * EXTRA CREDIT INCLUDED
  *
- * TODO: class description
+ * Prompts the user for the maximum number of points possible for each category
+ * of assignment in CIS 200. Then, prompts for up to 20 students and their
+ * scores in each category. When all students are entered, displays each
+ * student's (weighted average) total percentage and letter grade.
  */
 
 public class StudentApp {
@@ -12,6 +15,7 @@ public class StudentApp {
     final int LAB = 0, PROJECT = 1, ZYBOOK = 2, EXAM = 3, FINAL_EXAM = 4;
     Student[] students = new Student[20];
     View view = new View();
+    // View_GUI view = new View_GUI();
     String prefix = "Please enter the total number of points possible for ";
     int index;
 
