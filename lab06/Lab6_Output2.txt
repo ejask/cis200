@@ -1,0 +1,2 @@
+Number of values in the file: 12
+Average of all values: 3.92
