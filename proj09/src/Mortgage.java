@@ -14,7 +14,7 @@ public class Mortgage {
   private String accountNumber;
   private double principal;
   private double interest;
-  private byte term;
+  private int term;
 
   /** The minimum principal in dollars (inclusive). */
   final public static double MIN_PRINCIPAL = 100000.0;
@@ -29,10 +29,10 @@ public class Mortgage {
   final public static double MAX_INTEREST = 9.0;
 
   /** The minimum term length in years (inclusive). */
-  final public static byte MIN_TERM = 15;
+  final public static int MIN_TERM = 15;
 
   /** The maximum term length in years (inclusive). */
-  final public static byte MAX_TERM = 50;
+  final public static int MAX_TERM = 50;
 
   /** Constructs a new uninitialized {@link Mortgage} instance. */
   public Mortgage() {}
@@ -45,11 +45,11 @@ public class Mortgage {
    * @param term  the term length in years
    * @param interest  the yearly interest rate as a percentage
    */
-  public Mortgage(String name, double principal, byte term, double interest) {
+  public Mortgage(String name, double principal, int term, double interest) {
     this.setAccountName(name);
     this.setPrincipal(principal);
-    this.setTerm(term);
     this.setInterest(interest);
+    this.setTerm(term);
   }
 
   /**
@@ -71,15 +71,6 @@ public class Mortgage {
   }
 
   /**
-   * Returns the term length (in years) of this {@link Mortgage} instance.
-   * 
-   * @return the term of this {@link Mortgage}
-   */
-  public double getTerm() {
-    return this.term;
-  }
-
-  /**
    * Returns the yearly interest rate (as a percentage) of this {@link Mortgage}
    * instance.
    * 
@@ -87,6 +78,15 @@ public class Mortgage {
    */
   public double getInterest() {
     return this.interest;
+  }
+
+  /**
+   * Returns the term length (in years) of this {@link Mortgage} instance.
+   * 
+   * @return the term of this {@link Mortgage}
+   */
+  public int getTerm() {
+    return this.term;
   }
 
   /**
@@ -145,23 +145,6 @@ public class Mortgage {
   }
 
   /**
-   * @param years  the term length of this {@link Mortgage}
-   * @throws IllegalArgumentException  if the term is not between
-   *   {@value #MIN_TERM} years (inclusive) and {@value #MAX_TERM} years
-   *   (inclusive).
-   */
-  public void setTerm(byte years) throws IllegalArgumentException {
-    if (years < MIN_TERM || years > MAX_TERM) {
-      throw new IllegalArgumentException(String.format(
-        "Term must be in range %d (inclusive) and %d (inclusive).",
-        MIN_TERM,
-        MAX_TERM
-      ));
-    }
-    this.term = years;
-  }
-
-  /**
    * @param interest  the yearly interest rate of this {@link Mortgage}
    * @throws IllegalArgumentException  if the interest is not between
    *   {@value #MIN_INTEREST}% (inclusive) and {@value #MAX_INTEREST}%
@@ -176,6 +159,23 @@ public class Mortgage {
       ));
     }
     this.interest = interest;
+  }
+
+  /**
+   * @param years  the term length of this {@link Mortgage}
+   * @throws IllegalArgumentException  if the term is not between
+   *   {@value #MIN_TERM} years (inclusive) and {@value #MAX_TERM} years
+   *   (inclusive).
+   */
+  public void setTerm(int years) throws IllegalArgumentException {
+    if (years < MIN_TERM || years > MAX_TERM) {
+      throw new IllegalArgumentException(String.format(
+        "Term must be in range %d (inclusive) and %d (inclusive).",
+        MIN_TERM,
+        MAX_TERM
+      ));
+    }
+    this.term = years;
   }
 
   /**
