@@ -121,7 +121,7 @@ public class Mortgage {
       this.accountName.substring(0, Math.min(4, this.accountName.length()))
     );
     Random r = new Random();
-    for (byte i = 0; i <= NUM_DIGITS; i++) {
+    for (byte i = 0; i < NUM_DIGITS; i++) {
       sb.append(r.nextInt(10));
     }
     this.accountNumber = sb.toString();
@@ -136,7 +136,7 @@ public class Mortgage {
   public void setPrincipal(double dollars) throws IllegalArgumentException {
     if (dollars < MIN_PRINCIPAL || dollars >= MAX_PRINCIPAL) {
       throw new IllegalArgumentException(String.format(
-        "Principal must be in range $%.,2f (inclusive) and $%.,2f (exclusive).",
+        "Principal must be in range $%,.2f (inclusive) and $%,.2f (exclusive).",
         MIN_PRINCIPAL,
         MAX_PRINCIPAL
       ));
@@ -187,7 +187,7 @@ public class Mortgage {
   private double getMonthlyPayment() {
     double monthlyInterest = this.interest / 1200.0;
     double compound = Math.pow(1 + monthlyInterest, this.term * 12.0);
-    return this.principal * ((monthlyInterest * compound) / compound - 1);
+    return this.principal * ((monthlyInterest * compound) / (compound - 1));
   }
 
   /**
@@ -209,7 +209,7 @@ public class Mortgage {
   @Override
   public String toString() {
     return String.format(
-      "Account number: %s\nThe monthly payment is $%.,2f\nThe total payment is $%.,2f",
+      "Account number: %s\nThe monthly payment is $%,.2f\nThe total payment is $%,.2f",
       this.getAccountNumber(),
       this.getMonthlyPayment(),
       this.getTotalPayment()
