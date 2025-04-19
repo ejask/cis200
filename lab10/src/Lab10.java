@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Lab10b.java
+ * Lab10.java
  * Emma Jaskowiec / Thurs 4:30 (Lab 02B)
  *
  * Repeatedly takes in student info (name, username, credit hours, and total gpa
  * points). Then, prints each student's name, email, and gpa (and a separate
  * list of students on the dean's list).
  */
-public class Lab10b {
+public class Lab10 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		ArrayList<Student> students = new ArrayList<>();
