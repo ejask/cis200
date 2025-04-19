@@ -14,7 +14,7 @@ public class Mortgage {
   private String accountNumber;
   private double principal;
   private double interest;
-  private int term;
+  private byte term;
 
   /** The minimum principal in dollars (inclusive). */
   final public static double MIN_PRINCIPAL = 100000.0;
@@ -29,10 +29,10 @@ public class Mortgage {
   final public static double MAX_INTEREST = 9.0;
 
   /** The minimum term length in years (inclusive). */
-  final public static int MIN_TERM = 15;
+  final public static byte MIN_TERM = 15;
 
   /** The maximum term length in years (inclusive). */
-  final public static int MAX_TERM = 50;
+  final public static byte MAX_TERM = 50;
 
   /** Constructs a new uninitialized {@link Mortgage} instance. */
   public Mortgage() {}
@@ -42,10 +42,10 @@ public class Mortgage {
    *
    * @param name  the account name
    * @param principal  the principal amount in dollars
-   * @param term  the term length in years
    * @param interest  the yearly interest rate as a percentage
+   * @param term  the term length in years
    */
-  public Mortgage(String name, double principal, int term, double interest) {
+  public Mortgage(String name, double principal, double interest, int term) {
     this.setAccountName(name);
     this.setPrincipal(principal);
     this.setInterest(interest);
@@ -175,7 +175,7 @@ public class Mortgage {
         MAX_TERM
       ));
     }
-    this.term = years;
+    this.term = (byte) years;
   }
 
   /**
